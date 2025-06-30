@@ -33,7 +33,6 @@ const DeliveryForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-   
     if (name === "contact") {
       if (!/^\d{0,10}$/.test(value)) return;
     }
@@ -78,7 +77,7 @@ const DeliveryForm = () => {
   }, [showDialog]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 sm:p-6 relative">
       {showDialog && (
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50">
           <div className="bg-green-500 text-white px-6 py-3 rounded-md shadow-md">
@@ -89,14 +88,14 @@ const DeliveryForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-4xl"
+        className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-3xl"
       >
         <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">
           Delivery Form
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          {/* Amount */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Amount (₹)</label>
             <input
@@ -109,7 +108,7 @@ const DeliveryForm = () => {
             />
           </div>
 
-      
+          {/* Contact */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Contact Number</label>
             <input
@@ -123,6 +122,7 @@ const DeliveryForm = () => {
             />
           </div>
 
+          {/* Apartment Search */}
           <div className="relative">
             <label className="block mb-1 text-sm font-semibold">Apartment Name</label>
             <input
@@ -149,7 +149,7 @@ const DeliveryForm = () => {
             )}
           </div>
 
-         
+          {/* Flat Number Dropdown */}
           <div>
             <label className="block mb-1 text-sm font-semibold">Flat Number</label>
             <select
@@ -167,7 +167,7 @@ const DeliveryForm = () => {
             </select>
           </div>
 
-        
+          {/* Payment Status */}
           <div className="sm:col-span-2">
             <label className="block mb-2 font-semibold">Payment Status</label>
             <div className="flex flex-wrap gap-8">
@@ -196,6 +196,7 @@ const DeliveryForm = () => {
             </div>
           </div>
 
+          {/* Submit */}
           <div className="sm:col-span-2">
             <button
               type="submit"
