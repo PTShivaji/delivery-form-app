@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const apartmentList = [
-  "Brichwood",
-  "Norwood",
-  "Lake Side View",
-  "Sriram City",
-  "Aratt Requizza",
-  "Herculus",
-  "Smandow",
-  "Green Terrace",
-  "Aratt Firinza",
+  "Brichwood", "Norwood", "Lake Side View", "Sriram City",
+  "Aratt Requizza", "Herculus", "Smandow", "Green Terrace", "Aratt Firinza",
 ];
 
 const flatList = [
@@ -33,9 +26,7 @@ const DeliveryForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "contact") {
-      if (!/^\d{0,10}$/.test(value)) return;
-    }
+    if (name === "contact" && !/^\d{0,10}$/.test(value)) return;
 
     setFormData((prev) => ({
       ...prev,
@@ -58,11 +49,10 @@ const DeliveryForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const { amount, contact, apartment, flatNo, paymentStatus } = formData;
 
     if (!amount || !contact || !apartment || !flatNo || !paymentStatus) {
-      alert("Please fill all fields before submitting.");
+      alert("Please fill all fields");
       return;
     }
 
@@ -77,10 +67,10 @@ const DeliveryForm = () => {
   }, [showDialog]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 sm:p-6 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-6">
       {showDialog && (
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-green-500 text-white px-6 py-3 rounded-md shadow-md">
+          <div className="bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg">
             ✅ Form submitted successfully!
           </div>
         </div>
@@ -88,16 +78,16 @@ const DeliveryForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-3xl"
+        className="bg-white w-full max-w-3xl p-6 sm:p-8 rounded-xl shadow-xl"
       >
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-blue-700 mb-6">
           Delivery Form
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {/* Amount */}
           <div>
-            <label className="block mb-1 text-sm font-semibold">Amount (₹)</label>
+            <label className="block mb-1 font-medium">Amount (₹)</label>
             <input
               type="number"
               name="amount"
@@ -110,32 +100,32 @@ const DeliveryForm = () => {
 
           {/* Contact */}
           <div>
-            <label className="block mb-1 text-sm font-semibold">Contact Number</label>
+            <label className="block mb-1 font-medium">Contact Number</label>
             <input
               type="tel"
               name="contact"
               value={formData.contact}
               onChange={handleChange}
-              placeholder="10-digit mobile number"
-              maxLength={10}
+              placeholder="10-digit number"
               className="w-full border rounded-lg p-3"
+              maxLength={10}
             />
           </div>
 
           {/* Apartment Search */}
           <div className="relative">
-            <label className="block mb-1 text-sm font-semibold">Apartment Name</label>
+            <label className="block mb-1 font-medium">Apartment Name</label>
             <input
               type="text"
               name="apartment"
               value={formData.apartment}
               onChange={handleChange}
-              placeholder="Search apartment"
+              placeholder="Type to search"
               className="w-full border rounded-lg p-3"
               onFocus={() => setShowApartmentDropdown(true)}
             />
             {showApartmentDropdown && filteredApartments.length > 0 && (
-              <ul className="absolute z-50 bg-white border border-gray-300 rounded-md w-full mt-1 max-h-40 overflow-y-auto shadow-md">
+              <ul className="absolute z-50 bg-white border mt-1 w-full rounded-md shadow-md max-h-48 overflow-y-auto">
                 {filteredApartments.map((apt, idx) => (
                   <li
                     key={idx}
@@ -149,9 +139,9 @@ const DeliveryForm = () => {
             )}
           </div>
 
-          {/* Flat Number Dropdown */}
+          {/* Flat Number */}
           <div>
-            <label className="block mb-1 text-sm font-semibold">Flat Number</label>
+            <label className="block mb-1 font-medium">Flat Number</label>
             <select
               name="flatNo"
               value={formData.flatNo}
@@ -169,8 +159,8 @@ const DeliveryForm = () => {
 
           {/* Payment Status */}
           <div className="sm:col-span-2">
-            <label className="block mb-2 font-semibold">Payment Status</label>
-            <div className="flex flex-wrap gap-8">
+            <label className="block mb-2 font-medium">Payment Status</label>
+            <div className="flex flex-wrap gap-6">
               <label className="flex items-center gap-2">
                 <input
                   type="radio"
@@ -178,7 +168,7 @@ const DeliveryForm = () => {
                   value="Paid"
                   checked={formData.paymentStatus === "Paid"}
                   onChange={handleChange}
-                  className="accent-green-600"
+                  className="accent-green-500"
                 />
                 Paid
               </label>
@@ -189,7 +179,7 @@ const DeliveryForm = () => {
                   value="Unpaid"
                   checked={formData.paymentStatus === "Unpaid"}
                   onChange={handleChange}
-                  className="accent-red-600"
+                  className="accent-red-500"
                 />
                 Unpaid
               </label>
@@ -200,7 +190,7 @@ const DeliveryForm = () => {
           <div className="sm:col-span-2">
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition"
             >
               Submit
             </button>
